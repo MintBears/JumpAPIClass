@@ -4,6 +4,8 @@ class CObj;
 bool IsValid(CObj*& _pTarget);
 
 void Instantiate(CObj* _NewObj, Vec2 _Pos, LAYER _Layer);
+void ChangeLevel(LEVEL_TYPE _eNextLevel);
+
 
 void Saturate(float& _float);
 void SaveWString(const wstring& _str, FILE* _pFile);

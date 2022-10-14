@@ -20,5 +20,10 @@ public:
 	void init();
 	void tick();
 	void render(HDC _dc);
+
+private:
+	void ChangeLevel(LEVEL_TYPE _eNext);
+public:
+	friend class CEventMge;
 };
 

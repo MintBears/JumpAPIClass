@@ -44,14 +44,14 @@ void CAnimator::render(HDC _dc)
 	m_pCurAnim->render(_dc);
 }
 
-void CAnimator::CreateAnimation(const wstring& _strName, CTexture* _pAtlas, Vec2 _vLeftTop, Vec2 _vSize, int _iMaxFrmCount, float _fDuration)
+void CAnimator::CreateAnimation(const wstring& _strName, CTexture* _pAtlas, Vec2 _vLeftTop, Vec2 _vSize, Vec2 _vOffset, int _iMaxFrmCount, float _fDuration)
 {
 	CAnimation* pAnim = FindAnimation(_strName);
 	assert(!pAnim);
 
 	pAnim = new CAnimation(this);
 
-	pAnim->init(_strName, _pAtlas, _vLeftTop, _vSize, _iMaxFrmCount, _fDuration);
+	pAnim->init(_strName, _pAtlas, _vLeftTop, _vSize, _vOffset, _iMaxFrmCount, _fDuration);
 
 	m_mapAnim.insert(make_pair( _strName, pAnim));
 }

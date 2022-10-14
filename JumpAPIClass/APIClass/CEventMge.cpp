@@ -54,6 +54,12 @@ void CEventMge::tick()
 		}
 			break;
 		case EVENT_TYPE::LEVEL_CHANGE:
+		{
+			LEVEL_TYPE eNextLevel = (LEVEL_TYPE)m_Event[i].wParam;
+
+			CLevelMgr::GetInst()->ChangeLevel(eNextLevel);
+
+		}
 			break;
 		default:
 			break;

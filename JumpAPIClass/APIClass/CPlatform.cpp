@@ -23,13 +23,19 @@ void CPlatform::BeginOverlap(CCollider* _Other)
 	if (nullptr == pPlayer)
 		return;
 	
-	//pPlayer->GetCRigidbody()->SetWall(true);
+	pPlayer->GetCRigidbody()->SetGround(true);
 }
 
 void CPlatform::OnOverlap(CCollider* _Other)
 {
+
 }
 
 void CPlatform::EndOverlap(CCollider* _Other)
 {
+	CPlayer* pPlayer = dynamic_cast<CPlayer*>(_Other->GetOwner());
+	if (nullptr == pPlayer)
+		return;
+
+	pPlayer->GetCRigidbody()->SetGround(false);
 }

@@ -24,7 +24,7 @@ CAnimation::~CAnimation()
 {
 }
 
-void CAnimation::init(const wstring& _strName, CTexture* _pAtlas, Vec2 _vLeftTop, Vec2 _vSize, int _iMaxFrmCount, float _fDuration)
+void CAnimation::init(const wstring& _strName, CTexture* _pAtlas, Vec2 _vLeftTop, Vec2 _vSize, Vec2 _vOffset, int _iMaxFrmCount, float _fDuration)
 {
 	SetName(_strName);
 	m_pAtlas = _pAtlas;

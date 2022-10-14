@@ -40,3 +40,14 @@ void CLevelMgr::render(HDC _dc)
 {
 	m_CurLevel->render(_dc);
 }
+
+void CLevelMgr::ChangeLevel(LEVEL_TYPE _eNext)
+{
+	assert(m_CurLevel != m_arrLevel[(UINT)_eNext]);
+
+	m_CurLevel->Exit();
+
+	m_CurLevel = m_arrLevel[(UINT)_eNext];
+
+	m_CurLevel->Enter();
+}

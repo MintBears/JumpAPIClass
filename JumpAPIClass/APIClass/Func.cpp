@@ -30,6 +30,14 @@ void Instantiate(CObj* _NewObj, Vec2 _Pos, LAYER _Layer)
 	CEventMge::GetInst()->AddEvent(_evn);
 }
 
+void ChangeLevel(LEVEL_TYPE _eNextLevel)
+{
+	tEvent _evn = {};
+	_evn.eType = EVENT_TYPE::LEVEL_CHANGE;
+	_evn.wParam = (DWORD_PTR)_eNextLevel;
+	CEventMge::GetInst()->AddEvent(_evn);
+}
+
 void Saturate(float& _float)
 {
 	if (1.f < _float)

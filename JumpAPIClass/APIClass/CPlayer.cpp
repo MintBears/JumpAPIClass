@@ -34,14 +34,19 @@ CPlayer::CPlayer()
 
 	CTexture* tex = CResMgr::GetInst()->LoadTexture(L"Player", L"texture\\character_001_isaac.bmp");
 
-	//GetCAnimator()->CreateAnimation(L"HeadMove", tex, Vec2(0.f, 0.f), Vec2(32.f, 32.f), 6, 0.5f);
+	//GetCAnimator()->CreateAnimation(L"HeadMove", tex, Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), 6, 0.5f);
 	//
 	//GetCAnimator()->FindAnimation(L"HeadMove")->Save(L"animation\\HeadMove.anim");
 
 	GetCAnimator()->LoadAnimation(L"animation\\HeadMove.anim");
 
-	GetCRigidbody()->SetVelocityLimit(200.0f);
 	GetCRigidbody()->SetFriction(100.f);
+
+	GetCRigidbody()->SetGravity(true);
+	GetCRigidbody()->SetGravityAccel(800.f);
+	GetCRigidbody()->SetVelocityLimit(200.0f);
+	GetCRigidbody()->SetGravityVelocityLimit(1000.f);
+
 }
 
 CPlayer::~CPlayer()
@@ -57,29 +62,29 @@ void CPlayer::tick()
 	//해결 : 이걸 종합적으로 관리해줄 메니저를 따로 만들어야된다.
 	if (IsPressed(KEY::LEFT))
 	{
-		GetCRigidbody()->AddForce(Vec2(-200.f, 0.f));
+		GetCRigidbody()->AddForce(Vec2(-(m_fSpeed + 200.f), 0.f));
 		//vPos.x -= m_fSpeed * DT;
 	}
 
 	if (IsPressed(KEY::RIGHR))
 	{
-		GetCRigidbody()->AddForce(Vec2(200.f, 0.f));
+		GetCRigidbody()->AddForce(Vec2(m_fSpeed + 200.f, 0.f));
 		//vPos.x += m_fSpeed * DT;
 	}
 
-	if (IsPressed(KEY::UP))
-	{
-		GetCRigidbody()->AddForce(Vec2(0.f, -200.f));
-		//vPos.y -= m_fSpeed * DT;
-	}
+	//if (IsPressed(KEY::UP))
+	//{
+	//	GetCRigidbody()->AddForce(Vec2(0.f, -200.f));
+	//	//vPos.y -= m_fSpeed * DT;
+	//}
+	//
+	//if (IsPressed(KEY::DOWN))
+	//{
+	//	GetCRigidbody()->AddForce(Vec2(0.f, 200.f));
+	//	//vPos.y += m_fSpeed * DT;
+	//}
 
-	if (IsPressed(KEY::DOWN))
-	{
-		GetCRigidbody()->AddForce(Vec2(0.f, 200.f));
-		//vPos.y += m_fSpeed * DT;
-	}
-
-	if (IsTap(KEY::SPACE))
+	if (IsTap(KEY::LSHIFT))
 	{
 		//CLevel* CurLevel = CLevelMgr::GetInst()->GetCurLevel();
 
@@ -104,7 +109,12 @@ void CPlayer::tick()
 		}
 	}
 
-	if (IsTap(KEY::UP))
+	if (IsTap(KEY::SPACE))
+	{
+		GetCRigidbody()->AddVelocity(Vec2(0.f, -300.f));
+	}
+
+	if (IsTap(KEY::LEFT))
 		GetCAnimator()->Play(L"HeadMove", true);
 
 	SetPos(vPos);
