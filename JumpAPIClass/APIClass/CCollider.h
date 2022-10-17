@@ -7,6 +7,7 @@ class CCollider :
 {
 public:
     CCollider(CObj* _Owner);
+    CCollider(const CCollider& _other);
     virtual ~CCollider();
 
 private:
@@ -33,6 +34,8 @@ public:
 public:
     virtual void tick() override;
     virtual void render(HDC _dc) override;
+
+    CLONE(CCollider)
 
     void BeginOverlap(CCollider* _Other);
     void OnOverlap(CCollider* _Other);

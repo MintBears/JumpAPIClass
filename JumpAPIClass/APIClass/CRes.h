@@ -25,6 +25,8 @@ private:
 protected:
     virtual int Load(const wstring& _strFilePath) = 0;
 
+    CLONE_DEACTIVATE(CRes)
+
     friend class CResMgr;
 
 };

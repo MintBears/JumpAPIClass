@@ -11,13 +11,42 @@
 #include "CRigidbody.h"
 
 CObj::CObj()
-	: m_vPos{}
-	, m_vScale{}
+	: m_vPos()
+	, m_vScale()
 	, m_Collider(nullptr)
 	, m_Animator(nullptr)
 	, m_Rigidbody(nullptr)
 	, m_Dead(false)
 {
+}
+
+CObj::CObj(const CObj& _other)
+	: CEntity(_other)
+	, m_vPos(_other.m_vPos)
+	, m_vScale(_other.m_vScale)
+	, m_Collider(nullptr)
+	, m_Animator(nullptr)
+	, m_Rigidbody(nullptr)
+	, m_Dead(false)						//강제 세팅을 해야된다.
+{
+	//깊은 복사
+	if (_other.m_Collider != nullptr)
+	{
+		m_Collider = _other.m_Collider->Clone();
+		m_Collider->SetOwner(this);
+
+	}
+	if (_other.m_Animator != nullptr)
+	{
+		m_Animator = _other.m_Animator->Clone();
+		m_Animator->SetOwner(this);
+	}
+	if (_other.m_Rigidbody != nullptr)
+	{
+		m_Rigidbody = _other.m_Rigidbody->Clone();
+		m_Rigidbody->SetOwner(this);
+	}
+
 }
 
 CObj::~CObj()

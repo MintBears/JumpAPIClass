@@ -12,6 +12,7 @@ class CObj :
 {
 public:
     CObj();
+    CObj(const CObj& _other);
     virtual ~CObj();
 
 private: 
@@ -45,6 +46,8 @@ public :
     virtual void tick();
     virtual void final_tick() final;
     virtual void render(HDC _dc);
+
+    virtual CObj* Clone() = 0;
 
     void CreateCollider();
     void CreateAnimator();

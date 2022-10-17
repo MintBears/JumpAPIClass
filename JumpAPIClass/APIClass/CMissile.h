@@ -20,6 +20,8 @@ public:
     virtual void tick() override;
     virtual void render(HDC _dc)override;
 
+    CLONE(CMissile)
+
     virtual void BeginOverlap(CCollider* _Other) override;
 };
 

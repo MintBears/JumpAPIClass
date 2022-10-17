@@ -18,6 +18,8 @@ public:
     virtual void final_tick();
     virtual void render(HDC _dc); 
 
+    CLONE_DEACTIVATE(CLevel)
+
     virtual void Enter() = 0;           //레벨에 진입할때 호출
     virtual void Exit() = 0;            //레벨을 벗어날때 호출
 

@@ -24,6 +24,8 @@ public:
     void tick();
     void render(HDC _dc);
 
+    CLONE(CForce)
+
 private:
 };
 

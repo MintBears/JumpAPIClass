@@ -17,6 +17,22 @@ CRigidbody::CRigidbody(CObj* _pOwner)
 {
 }
 
+CRigidbody::CRigidbody(const CRigidbody& _other)
+	: CComponent(_other)
+	, m_vVelocity(_other.m_vVelocity)
+	, m_vForce(_other.m_vForce)
+	, m_fMass(_other.m_fMass)
+	, m_fFriction(_other.m_fFriction)
+	, m_fFrictionScale(_other.m_fFrictionScale)
+	, m_fVelocityLimit(_other.m_fVelocityLimit)
+	, m_bGravityUse(_other.m_bGravityUse)
+	, m_bGround(false)
+	, m_fGravityAccel(_other.m_fGravityAccel)
+	, m_fGravityVLimit(_other.m_fGravityVLimit)
+{
+
+}
+
 CRigidbody::~CRigidbody()
 {
 }

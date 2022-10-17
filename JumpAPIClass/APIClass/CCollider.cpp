@@ -4,11 +4,17 @@
 #include "CEngine.h"
 #include"CObj.h"
 
-CCollider::CCollider(CObj* _Owner) :
-	CComponent(_Owner),
-	m_OffsetPos(),
-	m_FinalPos(),
-	m_OverlapCount(0)
+CCollider::CCollider(CObj* _Owner) 
+	: CComponent(_Owner)
+	, m_OverlapCount(0)
+{
+}
+
+CCollider::CCollider(const CCollider& _other)
+	: CComponent(nullptr)
+	, m_OffsetPos(_other.m_OffsetPos)
+	, m_Scale(_other.m_Scale)
+	, m_OverlapCount(0)
 {
 }
 

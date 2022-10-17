@@ -10,6 +10,26 @@ CAnimator::CAnimator(CObj* _Owner)
 {
 }
 
+CAnimator::CAnimator(const CAnimator& _other)
+	: CComponent(_other)
+	, m_pCurAnim(_other.m_pCurAnim)
+	, m_bRepeat(_other.m_bRepeat)
+{
+	map<wstring, CAnimation*>::const_iterator iter = _other.m_mapAnim.begin();
+
+	for (; iter != _other.m_mapAnim.end(); iter++)
+	{
+		CAnimation* pAnim = iter->second->Clone();
+		pAnim->Reset();
+		pAnim->m_pAnimator = this;
+		m_mapAnim.insert(make_pair(iter->first, pAnim));
+	}
+	if (nullptr != m_pCurAnim)
+	{
+		Play(_other.m_pCurAnim->GetName(), m_bRepeat);
+	}
+}
+
 CAnimator::~CAnimator()
 {
 	map<wstring, CAnimation*>::iterator iter = m_mapAnim.begin();

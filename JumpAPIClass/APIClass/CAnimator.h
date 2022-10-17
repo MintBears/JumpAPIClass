@@ -9,6 +9,7 @@ class CAnimator :
 {
 public:
     CAnimator(CObj* _Owner);
+    CAnimator(const CAnimator& _other);
     virtual ~CAnimator();
 
 private:
@@ -21,6 +22,8 @@ private:
 public:
     virtual void tick() override;
     virtual void render(HDC _dc) override;
+
+    CLONE(CAnimator)
 
 public:
     void CreateAnimation(const wstring& _strName, CTexture* _pAtlas, Vec2 _vLeftTop, Vec2 _vSize, Vec2 _vOffset, int _iMaxFrmCount, float _fDuration);

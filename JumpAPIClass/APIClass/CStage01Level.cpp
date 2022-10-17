@@ -5,6 +5,7 @@
 #include "CKeyMgr.h"
 
 #include "CPlayer.h"
+#include "CMonster.h"
 
 CStage01Level::CStage01Level()
 {
@@ -16,10 +17,7 @@ CStage01Level::~CStage01Level()
 
 void CStage01Level::init()
 {
-	CPlayer* Player = new CPlayer;
-	Player->SetPos(Vec2((FLOAT)(CEngine::GetInst()->GetResolution().x / 2), (FLOAT)(CEngine::GetInst()->GetResolution().y / 2)));
-	Player->SetScale(Vec2(100.f, 100.f));
-	AddObject(Player, LAYER::PLAYER);
+
 }
 
 void CStage01Level::tick()

@@ -5,6 +5,7 @@ class CRigidbody :
 {
 public:
     CRigidbody(CObj* _pOwner);
+    CRigidbody(const CRigidbody& _other);
     ~CRigidbody();
 
 private:
@@ -46,6 +47,8 @@ public:
     virtual void tick() override;
     virtual void final_tick() override;
     virtual void render(HDC _dc) override;
+
+    CLONE(CRigidbody)
     
 public:
     void SetGround(bool _bGround);

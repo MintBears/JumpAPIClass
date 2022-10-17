@@ -48,10 +48,6 @@ void CCollisionMgr::LayerCheck(LAYER _left, LAYER _right)
 	
 	//비트 합치기		(1 ; 가장 왼쪽을 의미, << iCol : 왼쪽에서부터 몇칸 움직일건지)
 	m_matrix[iRow] |= (1 << iCol);
-	
-	m_matrix;
-
-
 }
 
 void CCollisionMgr::CollisionBtwLayer(LAYER _left, LAYER _right)
@@ -94,7 +90,7 @@ void CCollisionMgr::CollisionBtwLayer(LAYER _left, LAYER _right)
 			}
 
 
-			bool Dead = vecLeft[i]->IsDead() || vecRight[i]->IsDead();
+			bool Dead = vecLeft[i]->IsDead() || vecRight[j]->IsDead();
 
 
 

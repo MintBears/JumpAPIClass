@@ -30,17 +30,27 @@ void CStartLevel::init()
 	CResMgr::GetInst()->LoadTexture(L"Monster", L"texture\\magicmushroom.bmp");
 
 	CPlayer* Player = new CPlayer;
-	Player->SetPos(Vec2((FLOAT)(CEngine::GetInst()->GetResolution().x / 2), (FLOAT)(CEngine::GetInst()->GetResolution().y / 2)));
+	//Player->SetPos(Vec2((FLOAT)(CEngine::GetInst()->GetResolution().x / 2), (FLOAT)(CEngine::GetInst()->GetResolution().y / 2)));
+	Player->SetPos(Vec2(500.f, 500.f));
+	Player->SetScale(Vec2(100.f, 100.f));
+	AddObject(Player, LAYER::PLAYER);
+
+	Player = Player->Clone();
+	Player->SetPos(Vec2(800.f, 500.f));
 	Player->SetScale(Vec2(100.f, 100.f));
 	AddObject(Player, LAYER::PLAYER);
 
 	CMonster* Monster = new CMonster;
-	Monster->SetPos(Vec2((FLOAT)(CEngine::GetInst()->GetResolution().x / 4), (FLOAT)(CEngine::GetInst()->GetResolution().y / 4)));
+	Monster->SetPos(Vec2(500.f, 700.f));
 	Monster->SetScale(Vec2(100.f, 100.f));
-	Monster->SetTarget(Player);
-
+	//Monster->SetTarget(Player);
 	AddObject(Monster, LAYER::MONSTER);
 
+
+	Monster = Monster->Clone();
+	Monster->SetPos(Vec2(1000.f, 700.f));
+	Monster->SetScale(Vec2(100.f, 100.f));
+	AddObject(Monster, LAYER::MONSTER);
 
 	//level의 충돌 체크
 	CCollisionMgr::GetInst()->LayerCheck(LAYER::PLAYER, LAYER::MONSTER);

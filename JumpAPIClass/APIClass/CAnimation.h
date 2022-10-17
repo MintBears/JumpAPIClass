@@ -12,7 +12,7 @@ public:
     ~CAnimation();
 
 private:
-    CAnimator* const    m_pAnimator;
+    CAnimator*          m_pAnimator;
     vector<tAnimFrm>    m_vecFrm;
     CTexture*           m_pAtlas;
     int                 m_iCurFrm;
@@ -23,9 +23,9 @@ public:
     bool IsFinish() { return m_bFinish; }
     void Reset()
     {
-        m_bFinish = false;
         m_iCurFrm = 0;
         m_fAccTime = 0.f;
+        m_bFinish = false;
     }
 
 private:
@@ -33,6 +33,8 @@ private:
 public:
     void tick();
     void render(HDC _dc);
+
+    CLONE(CAnimation)
 
     void Save(const wstring& _strRelativePath);
     void Load(const wstring& _strRelativePath);

@@ -13,6 +13,9 @@
 #define DEL(p) if (nullptr != p) delete p;
 #define PI	3.1215926535f
 
+#define CLONE(type)	virtual type* Clone() { return new type(*this); }
+#define CLONE_DEACTIVATE(type)	virtual type* Clone() { assert(nullptr); return nullptr; }
+
 enum class LEVEL_TYPE
 {
 	START,

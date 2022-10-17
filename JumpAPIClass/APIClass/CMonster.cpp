@@ -27,6 +27,7 @@ CMonster::~CMonster()
 
 void CMonster::tick()
 {
+	
 	if (IsValid(m_Target))
 	{
 		Vec2 TargetPos = m_Target->GetPos();
@@ -70,7 +71,7 @@ void CMonster::render(HDC _dc)
 	tBlend.BlendFlags = 0;
 	tBlend.BlendOp = AC_SRC_OVER;
 	tBlend.SourceConstantAlpha = (int)(255 * fRatio);
-	//tBlend.SourceConstantAlpha = 255;
+	//tBlend.SourceConstantAlpha = 0;
 
 
 	AlphaBlend(_dc, (int)(vPos.x - m_pTex->Widht() / 2.0f)
