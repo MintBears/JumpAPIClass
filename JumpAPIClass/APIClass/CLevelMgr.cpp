@@ -4,6 +4,7 @@
 #include "CLevel.h"
 #include "CStartLevel.h"
 #include "CStage01Level.h"
+#include "CEditorLevel.h"
 
 CLevelMgr::CLevelMgr() :
 	m_arrLevel{},
@@ -24,9 +25,12 @@ void CLevelMgr::init()
 	//level »ı¼º
 	m_arrLevel[(UINT)LEVEL_TYPE::START] = new CStartLevel;
 	m_arrLevel[(UINT)LEVEL_TYPE::STAGE_01] = new CStage01Level;
+	m_arrLevel[(UINT)LEVEL_TYPE::EDITOR] = new CEditorLevel;
 
-	m_CurLevel = m_arrLevel[(UINT)LEVEL_TYPE::START];
-	m_CurLevel->init();
+	//m_CurLevel = m_arrLevel[(UINT)LEVEL_TYPE::START];
+	//m_CurLevel->init();
+
+	ChangeLevel(LEVEL_TYPE::EDITOR);
 	
 }
 
@@ -45,8 +49,10 @@ void CLevelMgr::ChangeLevel(LEVEL_TYPE _eNext)
 {
 	assert(m_CurLevel != m_arrLevel[(UINT)_eNext]);
 
-	m_CurLevel->Exit();
-
+	if (nullptr != m_CurLevel)
+	{
+		m_CurLevel->Exit();
+	}
 	m_CurLevel = m_arrLevel[(UINT)_eNext];
 
 	m_CurLevel->Enter();

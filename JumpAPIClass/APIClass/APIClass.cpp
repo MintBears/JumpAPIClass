@@ -27,6 +27,8 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
                       int       nCmdShow)
 {
 
+    //LoadStringW(hInstance, IDC_WINDOW, szWindowClass, MAX_LOADSTRING);
+
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     //_CrtSetBreakAlloc(숫자입력)
 
@@ -96,7 +98,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APICLASS));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = nullptr;
+    wcex.lpszMenuName = nullptr;// MAKEINTRESOURCEW(IDC_APICLASS);
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -124,7 +126,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 
-
+INT_PTR CALLBACK TileCount(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -137,10 +139,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wmId)
             {
             case IDM_ABOUT:
+            {
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+
+            }
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
+                break;
+            case CHANGE_TILECOUNT:
+            {
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_TILECOUNT), hWnd, TileCount);
+            }
                 break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);

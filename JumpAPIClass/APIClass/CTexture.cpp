@@ -49,3 +49,25 @@ void CTexture::Create(UINT _iWidth, UINT _iHeight)
 
 	GetObject(m_hBit, sizeof(BITMAP), &m_BitmapInfo);
 }
+
+void CTexture::Resize(UINT _iWidth, UINT _iHeight)
+{
+
+	HBITMAP hNewBit = CreateCompatibleBitmap(CEngine::GetInst()->GetMainDC(), _iWidth, _iHeight);
+	//새로운 dc 생성 , m_hDC를 받는이유 => 기존에 사용하던 기본 정보들을 가지고 새로운 dc를 만들기위해
+	HDC hNewDC = CreateCompatibleDC(CEngine::GetInst()->GetMainDC());
+	//새로운 dc와 bit를 연결 시켜준다.
+	HBITMAP hPrevBit = (HBITMAP)SelectObject(hNewDC, hNewBit);
+	//dc를 만들면서 초기에 가르키던 bit를 지워줘야된다.
+	DeleteObject(hPrevBit);
+
+	BitBlt(hNewDC, 0, 0, m_BitmapInfo.bmWidth, m_BitmapInfo.bmHeight, m_hDC, 0, 0, SRCCOPY);
+
+	DeleteObject(m_hBit);
+	DeleteDC(m_hDC);
+
+	m_hBit = hNewBit;
+	m_hDC = hNewDC;
+
+	GetObject(m_hBit, sizeof(BITMAP), &m_BitmapInfo);
+}

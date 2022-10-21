@@ -10,8 +10,9 @@
 #include <memory.h>
 #include <tchar.h>
 
-#include <crtdbg.h>
+#include <commdlg.h>
 
+#include <crtdbg.h>
 #include <assert.h>
 
 #include <vector>

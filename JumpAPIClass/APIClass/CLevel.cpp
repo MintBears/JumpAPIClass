@@ -2,7 +2,11 @@
 #include "CLevel.h"
 #include "CObj.h"
 
+#include "CTile.h"
+
 CLevel::CLevel()
+	: m_iTileXCount(0)
+	, m_iTileYCount(0)
 {
 }
 
@@ -73,3 +77,35 @@ void CLevel::DeleteAllobject()
 	}
 	//오브젝트 삭제 
 }
+
+void CLevel::DeleteObject(LAYER _eLayer)
+{
+	for (size_t i = 0; i < m_arrLayer[(UINT)_eLayer].size(); i++)
+	{
+		delete m_arrLayer[(UINT)_eLayer][i];
+	}
+	m_arrLayer[(UINT)_eLayer].clear();
+}
+
+void CLevel::CreateTile(UINT _x, UINT _y)
+{
+	//기존 타일 제거
+	DeleteObject(LAYER::TILE);
+
+	m_iTileXCount = _x;
+	m_iTileYCount = _y;
+
+	//가로 세로 숫자에 맞추어 타일 배치
+	for (UINT iRow = 0; iRow < m_iTileYCount; iRow++)
+	{
+		for (UINT iCol = 0; iCol < m_iTileXCount; iCol++)
+		{
+			CTile* pTile = new CTile;
+			pTile->SetPos(Vec2((float)(TILE_SIZE * iCol), (float)(TILE_SIZE * iRow)));
+			AddObject(pTile, LAYER::TILE);
+		}
+	}
+
+}
+
+

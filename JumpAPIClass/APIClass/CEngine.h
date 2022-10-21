@@ -28,6 +28,10 @@ public:
 private:
 	void tick();
 	void render();
+
 	void CreatPenBrush();
+
+public:
+	void ChangeWindowSize(UINT _iWidth, UINT _iHeight);
 
 };

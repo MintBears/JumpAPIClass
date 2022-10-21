@@ -44,16 +44,12 @@ void CEngine::Inst(HWND _hwnd, UINT _iWidth, UINT _iHeight)
 	m_Resolution.x = _iWidth;
 	m_Resolution.y = _iHeight;
 
-	//원도우 크기 설정
-	RECT rt = { 0, 0, (LONG)_iWidth, (LONG)_iHeight};
-	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
-	SetWindowPos(m_hMainWnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0); 
-
 	//HDC 초기화
 	m_hDC = GetDC(m_hMainWnd);
 
-	//백버퍼 용 비트맵 제작
-	m_pMemTex = CResMgr::GetInst()->CreatTexture(L"BackBuffer", m_Resolution.x, m_Resolution.y);
+	//원도우 크기 설정
+	ChangeWindowSize(_iWidth, _iHeight);
+
 
 	//자주사용하는 팬 브러쉬
 	CreatPenBrush();
@@ -116,4 +112,34 @@ void CEngine::CreatPenBrush()
 	//DeleteObject(hWhiteBrush);
 	//
 	//GetStockObject(HOLLOW_BRUSH);
+}
+
+void CEngine::ChangeWindowSize(UINT _iWidth, UINT _iHeight)
+{
+
+	m_Resolution.x = _iWidth;
+	m_Resolution.y = _iHeight;
+
+	//원도우 크기 설정
+	RECT rt = { 0, 0, m_Resolution.x , m_Resolution.y };
+
+	HMENU hMenu = GetMenu(m_hMainWnd);
+
+	if (nullptr != hMenu)
+		AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
+	else
+		AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
+	SetWindowPos(m_hMainWnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
+
+	//백버퍼 용 비트맵 제작
+	 //백버퍼가 없으면 생성
+	if (nullptr == m_pMemTex)
+		m_pMemTex = CResMgr::GetInst()->CreatTexture(L"BackBuffer", m_Resolution.x, m_Resolution.y);
+	//백버퍼가 있으면, 변경된 해상도에 맞추어 크기 재조정
+	else
+		m_pMemTex->Resize(m_Resolution.x, m_Resolution.y);
+
+
+	
+	
 }
