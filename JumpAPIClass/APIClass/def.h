@@ -54,8 +54,8 @@ enum class LAYER
 
 	FORCE,
 
-
-	END = 16
+	UI = 15,
+	END = 16,
 };
 
 enum class EVENT_TYPE

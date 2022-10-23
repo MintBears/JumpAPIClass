@@ -104,6 +104,15 @@
     <Filter Include="Game\04.Object\Tile">
       <UniqueIdentifier>{a9fd2555-dcba-4ae0-abe5-b4bc0609783d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\04.Object\UI">
+      <UniqueIdentifier>{f8990622-b35b-4899-8082-e3d67bb54d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\02.Manger\UIMgr">
+      <UniqueIdentifier>{403c15b1-e218-45ba-ac67-625f6ebb0e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\04.Object\UI\ButtonUI">
+      <UniqueIdentifier>{e79de810-504c-4ff9-80f6-461324fb968c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -217,6 +226,15 @@
     <ClInclude Include="CTile.h">
       <Filter>Game\04.Object\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Game\04.Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMgr.h">
+      <Filter>Game\02.Manger\UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CButton.h">
+      <Filter>Game\04.Object\UI\ButtonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="APIClass.rc">
@@ -325,6 +343,15 @@
     </ClCompile>
     <ClCompile Include="CTile.cpp">
       <Filter>Game\04.Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Game\04.Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMgr.cpp">
+      <Filter>Game\02.Manger\UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CButton.cpp">
+      <Filter>Game\04.Object\UI\ButtonUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "CEventMge.h"
 #include "CCamera.h"
 #include "CResMgr.h"
+#include "CUIMgr.h"
 
 #include "CTexture.h"
 
@@ -59,6 +60,7 @@ void CEngine::Inst(HWND _hwnd, UINT _iWidth, UINT _iHeight)
 	CTimeMgr::GetInst()->init();
 	CKeyMgr::GetInst()->init();
 	CLevelMgr::GetInst()->init();
+
 }
 
 void CEngine::progress()
@@ -79,6 +81,7 @@ void CEngine::tick()
 	CCamera::GetInst()->tick();
 	CLevelMgr::GetInst()->tick();
 	CCollisionMgr::GetInst()->tick();
+	CUIMgr::GetInst()->tick();
 
 }
 

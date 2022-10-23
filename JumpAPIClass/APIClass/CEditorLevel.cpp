@@ -13,6 +13,8 @@
 #include "CPathMgr.h"
 
 #include "CTile.h"
+#include "CUI.h"
+#include "CButton.h"
 
 CEditorLevel::CEditorLevel()
 	: m_hMenu(nullptr)
@@ -33,6 +35,15 @@ void CEditorLevel::init()
 
 	Vec2 Resolution = CEngine::GetInst()->GetResolution();
 	CCamera::GetInst()->SetLook(Resolution / 2.f);
+
+	//UI ¹èÄ¡
+	CButton* pButtonUI = new CButton;
+	pButtonUI->SetScale(Vec2(100.f, 50.f));
+	Vec2 vUIPos = Vec2(Resolution.x - pButtonUI->GetScale().x - 10, 10.f);
+	pButtonUI->SetPos(vUIPos);
+	AddObject(pButtonUI, LAYER::UI);
+
+
 
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"TileAtlas", L"texture\\TILE.bmp");
 

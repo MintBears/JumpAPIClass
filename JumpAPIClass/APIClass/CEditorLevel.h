@@ -33,7 +33,8 @@ private:
     void tile_update();
     void animation_update();
     void object_update();
-    
+
+public:
     void SaveTile();
     void LoadTile();
 };

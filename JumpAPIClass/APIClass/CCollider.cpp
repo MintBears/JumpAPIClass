@@ -24,9 +24,12 @@ CCollider::~CCollider()
 
 void CCollider::tick()
 {
-	m_FinalPos = GetOwner()->GetPos() + m_OffsetPos;
-
 	assert(!(m_OverlapCount < 0));
+}
+
+void CCollider::final_tick()
+{
+	m_FinalPos = GetOwner()->GetPos() + m_OffsetPos;
 }
 
 void CCollider::render(HDC _dc)

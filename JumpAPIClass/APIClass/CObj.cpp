@@ -77,17 +77,17 @@ void CObj::tick()
 
 void CObj::final_tick()
 {
-	if (nullptr != m_Collider)
+	if (nullptr != m_Rigidbody)
 	{
-		m_Collider->final_tick();
+		m_Rigidbody->final_tick();
 	}
 	if (nullptr != m_Animator)
 	{
 		m_Animator->final_tick();
 	}
-	if (nullptr != m_Rigidbody)
+	if (nullptr != m_Collider)
 	{
-		m_Rigidbody->final_tick();
+		m_Collider->final_tick();
 	}
 }
 

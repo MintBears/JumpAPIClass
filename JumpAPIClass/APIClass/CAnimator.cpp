@@ -42,7 +42,11 @@ CAnimator::~CAnimator()
 
 void CAnimator::tick()
 {
-	m_bRepeat;
+	
+}
+
+void CAnimator::final_tick()
+{
 	if (nullptr == m_pCurAnim)
 	{
 		return;
