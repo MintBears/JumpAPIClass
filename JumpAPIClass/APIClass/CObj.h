@@ -6,6 +6,7 @@
 class CCollider;
 class CAnimator;
 class CRigidbody;
+class CAI;
 
 class CObj :
     public CEntity
@@ -22,6 +23,7 @@ private:
     CCollider*      m_Collider;
     CAnimator*      m_Animator;
     CRigidbody*     m_Rigidbody;
+    CAI*            m_pAI;
 
     bool            m_Dead;
 
@@ -37,6 +39,7 @@ public :
     CCollider* GetCollider() { return m_Collider; }
     CAnimator* GetCAnimator() { return m_Animator; }
     CRigidbody* GetCRigidbody() { return m_Rigidbody; }
+    CAI* GetCAI() { return m_pAI; }
 
     bool IsDead() { return m_Dead; }
     void SetDead();
@@ -52,6 +55,7 @@ public :
     void CreateCollider();
     void CreateAnimator();
     void CreatRigidbody();
+    void CreatAI();
 
 
 public:

@@ -7,18 +7,32 @@
 
 #include "CPlayer.h"
 #include "CCollider.h"
+#include "CAI.h"
+#include "CIdleState.h"
+#include "CtraceState.h"
 
 CMonster::CMonster()
 	: m_HP(3)
 	, m_Speed(100.f)
 	, m_Target(nullptr)
 	, m_pTex(nullptr)
+	, m_tInfo{}
 {
 	CreateCollider();
-	GetCollider()->SetScale(Vec2(150.f, 150.f));
+	CreatAI();
 
+	//충돌체 체크
+	GetCollider()->SetScale(Vec2(150.f, 150.f));
 	m_pTex = CResMgr::GetInst()->FindTexture(L"Monster");
 	
+	m_tInfo.m_fSpeed = 100.f;
+	m_tInfo.m_fDetectRange = 500.f;
+
+	//ai 설정
+	GetCAI()->AddState(L"Idle", new CIdleState);
+	GetCAI()->AddState(L"Trace", new CtraceState);
+
+	GetCAI()->ChangeState(L"Idle");
 }
 
 CMonster::~CMonster()
@@ -27,7 +41,7 @@ CMonster::~CMonster()
 
 void CMonster::tick()
 {
-	
+	/*
 	if (IsValid(m_Target))
 	{
 		Vec2 TargetPos = m_Target->GetPos();
@@ -41,7 +55,7 @@ void CMonster::tick()
 		ThisPos.y += Dir.y * m_Speed * DT;
 
 		SetPos(ThisPos);
-	}
+	}*/
 	CObj::tick();
 }
 

@@ -113,6 +113,27 @@
     <Filter Include="Game\04.Object\UI\ButtonUI">
       <UniqueIdentifier>{e79de810-504c-4ff9-80f6-461324fb968c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\04.Object\UI\PanelUI">
+      <UniqueIdentifier>{605aefdb-51a3-48c3-9b5a-51b8663cf9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\05.Component\AI">
+      <UniqueIdentifier>{ec6a7342-3165-429c-8d1a-9b8be9a002b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07.MonsterState">
+      <UniqueIdentifier>{5599ddee-ef2a-4dfa-a6ba-513e0f16a8eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07.MonsterState\IdleState">
+      <UniqueIdentifier>{1aaf07c9-9f15-4bf1-98b5-7c5c18288e30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07.MonsterState\TraceState">
+      <UniqueIdentifier>{1065d29a-5389-4d84-9c85-5339dc72783a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07.MonsterState\AttackState">
+      <UniqueIdentifier>{52bd72e7-3d16-4439-9ac8-da53ff2c5914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07.MonsterState\DeadState">
+      <UniqueIdentifier>{aca3e095-b7f1-4677-895e-0c2416f251a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -235,6 +256,21 @@
     <ClInclude Include="CButton.h">
       <Filter>Game\04.Object\UI\ButtonUI</Filter>
     </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>Game\04.Object\UI\PanelUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAI.h">
+      <Filter>Game\05.Component\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Game\07.MonsterState</Filter>
+    </ClInclude>
+    <ClInclude Include="CIdleState.h">
+      <Filter>Game\07.MonsterState\IdleState</Filter>
+    </ClInclude>
+    <ClInclude Include="CtraceState.h">
+      <Filter>Game\07.MonsterState\TraceState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="APIClass.rc">
@@ -352,6 +388,24 @@
     </ClCompile>
     <ClCompile Include="CButton.cpp">
       <Filter>Game\04.Object\UI\ButtonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditorLevel_init.cpp">
+      <Filter>Game\03.Level\04.Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>Game\04.Object\UI\PanelUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAI.cpp">
+      <Filter>Game\05.Component\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Game\07.MonsterState</Filter>
+    </ClCompile>
+    <ClCompile Include="CIdleState.cpp">
+      <Filter>Game\07.MonsterState\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="CtraceState.cpp">
+      <Filter>Game\07.MonsterState\TraceState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

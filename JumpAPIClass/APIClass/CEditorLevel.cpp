@@ -30,33 +30,6 @@ CEditorLevel::~CEditorLevel()
 	}
 }
 
-void CEditorLevel::init()
-{
-
-	Vec2 Resolution = CEngine::GetInst()->GetResolution();
-	CCamera::GetInst()->SetLook(Resolution / 2.f);
-
-	//UI ¹èÄ¡
-	CButton* pButtonUI = new CButton;
-	pButtonUI->SetScale(Vec2(100.f, 50.f));
-	Vec2 vUIPos = Vec2(Resolution.x - pButtonUI->GetScale().x - 10, 10.f);
-	pButtonUI->SetPos(vUIPos);
-	AddObject(pButtonUI, LAYER::UI);
-
-
-
-	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"TileAtlas", L"texture\\TILE.bmp");
-
-	CreateTile(8,6);
-
-	const vector<CObj*>& vecTIle = GetLayer(LAYER::TILE);
-	for (size_t i = 0; i < vecTIle.size(); i++)
-	{
-		((CTile*)vecTIle[i])->SetAltas(pTex);
-		((CTile*)vecTIle[i])->SetImgIdx((int)i);
-	}
-}
-
 void CEditorLevel::tick()
 {
 	CLevel::tick();

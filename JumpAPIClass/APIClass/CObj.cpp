@@ -9,6 +9,7 @@
 #include "CCollider.h"
 #include "CAnimator.h"
 #include "CRigidbody.h"
+#include "CAI.h"
 
 CObj::CObj()
 	: m_vPos()
@@ -16,6 +17,7 @@ CObj::CObj()
 	, m_Collider(nullptr)
 	, m_Animator(nullptr)
 	, m_Rigidbody(nullptr)
+	, m_pAI(nullptr)
 	, m_Dead(false)
 {
 }
@@ -27,6 +29,7 @@ CObj::CObj(const CObj& _other)
 	, m_Collider(nullptr)
 	, m_Animator(nullptr)
 	, m_Rigidbody(nullptr)
+	, m_pAI(nullptr)
 	, m_Dead(false)						//강제 세팅을 해야된다.
 {
 	//깊은 복사
@@ -46,6 +49,11 @@ CObj::CObj(const CObj& _other)
 		m_Rigidbody = _other.m_Rigidbody->Clone();
 		m_Rigidbody->SetOwner(this);
 	}
+	if (_other.m_pAI != nullptr)
+	{
+		m_pAI = _other.m_pAI->Clone();
+		m_pAI->SetOwner(this);
+	}
 
 }
 
@@ -54,6 +62,7 @@ CObj::~CObj()
 	DEL(m_Collider);
 	DEL(m_Animator);
 	DEL(m_Rigidbody);
+	DEL(m_pAI);
 }
 
 
@@ -67,6 +76,10 @@ void CObj::tick()
 	if (nullptr != m_Animator)
 	{
 		m_Animator->tick();
+	}
+	if (nullptr != m_pAI)
+	{
+		m_pAI->tick();
 	}
 	if (nullptr != m_Rigidbody)
 	{
@@ -84,6 +97,10 @@ void CObj::final_tick()
 	if (nullptr != m_Animator)
 	{
 		m_Animator->final_tick();
+	}
+	if (nullptr != m_pAI)
+	{
+		m_pAI->final_tick();
 	}
 	if (nullptr != m_Collider)
 	{
@@ -125,4 +142,9 @@ void CObj::CreateAnimator()
 void CObj::CreatRigidbody()
 {
 	m_Rigidbody = new CRigidbody(this);
+}
+
+void CObj::CreatAI()
+{
+	m_pAI = new CAI(this);
 }

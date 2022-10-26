@@ -16,6 +16,7 @@ CTile::~CTile()
 
 void CTile::tick()
 {
+
 }
 
 void CTile::render(HDC _dc)

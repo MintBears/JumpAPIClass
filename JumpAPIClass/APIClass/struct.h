@@ -138,3 +138,17 @@ struct tAnimFrm
 	Vec2		Offset;			//추가이동
 	FLOAT		Duration;		//해당 프레임 노출 시간
 };
+
+struct tMonsterInfo
+{
+	UINT		m_iHP;
+	UINT		m_iMaxHP;
+
+	float		m_fAtt;					//공격력
+	float		m_fDef;					//방어력
+	float		m_fAgi;					//민첩성
+
+	float		m_fSpeed;				//속도
+	float		m_fDetectRange;			//탐지범위
+	float		m_fAttRange;			//공격범위
+};

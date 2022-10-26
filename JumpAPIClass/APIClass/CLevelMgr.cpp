@@ -30,7 +30,7 @@ void CLevelMgr::init()
 	//m_CurLevel = m_arrLevel[(UINT)LEVEL_TYPE::START];
 	//m_CurLevel->init();
 
-	ChangeLevel(LEVEL_TYPE::EDITOR);
+	ChangeLevel(LEVEL_TYPE::START);
 	
 }
 

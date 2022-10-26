@@ -61,6 +61,12 @@ void CEventMge::tick()
 
 		}
 			break;
+		case EVENT_TYPE::CHANGE_AI_STATE:
+		{
+			CAI* pAI = (CAI*)m_Event[i].wParam;
+			const wchar_t* pName = (const wchar_t*)m_Event[i].lParam;
+		}
+			break;
 		default:
 			break;
 		}

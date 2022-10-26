@@ -4,20 +4,55 @@
 #include "CEngine.h"
 #include "CKeyMgr.h"
 
+#include "CTexture.h"
+
 CUI::CUI()
-	: m_bLbtnDown(false)
+	: m_pParentUI(nullptr)
+	, m_pIdleTex(nullptr)
+	, m_bLbtnDown(false)
 	, m_bMouseOn(false)
 	, m_bCmrAfctd(false)
 {
 }
 
+CUI::CUI(const CUI& _other)
+	: CObj(_other)
+	, m_pParentUI(nullptr)
+	, m_pIdleTex(_other.m_pIdleTex)
+	, m_bLbtnDown(false)
+	, m_bMouseOn(false)
+	, m_bCmrAfctd(_other.m_bCmrAfctd)
+{
+	for (size_t i = 0; i < _other.m_vecChildUI.size(); ++i)
+	{
+		AddChildUI(_other.m_vecChildUI[i]->Clone());
+	}
+}
+
 CUI::~CUI()
 {
+	for (size_t i = 0; i < m_vecChildUI.size(); ++i)
+	{
+		delete m_vecChildUI[i];
+	}
 }
 
 void CUI::tick()
 {
+	//최종 위치 계산
+	m_vFinalPos = GetPos();
+	if (m_pParentUI)
+	{
+		m_vFinalPos += m_pParentUI->GetFinalPos();
+	}
+
+	//마우스 체크
 	MouseOnCheck();
+
+	for (size_t i = 0; i < m_vecChildUI.size(); i++)
+	{
+		m_vecChildUI[i]->tick();
+	}
 }
 
 void CUI::render(HDC _dc)
@@ -44,11 +79,34 @@ void CUI::render(HDC _dc)
 	SelectObject(_dc, hOriginPen);
 	SelectObject(_dc, hOriginBrush);
 
+
+
+	render_childUI(_dc);
+}
+
+void CUI::render_childUI(HDC _dc)
+{
+	for (size_t i = 0; i < m_vecChildUI.size(); i++)
+	{
+		m_vecChildUI[i]->render(_dc);
+	}
+}
+
+
+void CUI::SetIdleTex(CTexture* _pTex)
+{
+	m_pIdleTex = _pTex;
+
+	if (nullptr != m_pIdleTex)
+	{
+		Vec2 vScale = Vec2((float)m_pIdleTex->Widht(), (float)m_pIdleTex->Height());
+		SetScale(vScale);
+	}
 }
 
 void CUI::MouseOnCheck()
 {
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetFinalPos();
 	Vec2 vScale = GetScale();
 	Vec2 vMousePos = MOUSE_POS;
 	if (m_bCmrAfctd)

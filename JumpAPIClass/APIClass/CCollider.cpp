@@ -2,7 +2,7 @@
 #include "CCollider.h"
 
 #include "CEngine.h"
-#include"CObj.h"
+#include "CObj.h"
 
 CCollider::CCollider(CObj* _Owner) 
 	: CComponent(_Owner)

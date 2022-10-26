@@ -42,10 +42,8 @@ CPlayer::CPlayer()
 
 	GetCRigidbody()->SetFriction(100.f);
 
-	GetCRigidbody()->SetGravity(true);
-	GetCRigidbody()->SetGravityAccel(800.f);
+	GetCRigidbody()->SetGravity(false);
 	GetCRigidbody()->SetVelocityLimit(200.0f);
-	GetCRigidbody()->SetGravityVelocityLimit(1000.f);
 
 }
 
@@ -72,17 +70,17 @@ void CPlayer::tick()
 		//vPos.x += m_fSpeed * DT;
 	}
 
-	//if (IsPressed(KEY::UP))
-	//{
-	//	GetCRigidbody()->AddForce(Vec2(0.f, -200.f));
-	//	//vPos.y -= m_fSpeed * DT;
-	//}
-	//
-	//if (IsPressed(KEY::DOWN))
-	//{
-	//	GetCRigidbody()->AddForce(Vec2(0.f, 200.f));
-	//	//vPos.y += m_fSpeed * DT;
-	//}
+	if (IsPressed(KEY::UP))
+	{
+		GetCRigidbody()->AddForce(Vec2(0.f, -200.f));
+		//vPos.y -= m_fSpeed * DT;
+	}
+	
+	if (IsPressed(KEY::DOWN))
+	{
+		GetCRigidbody()->AddForce(Vec2(0.f, 200.f));
+		//vPos.y += m_fSpeed * DT;
+	}
 
 	if (IsTap(KEY::LSHIFT))
 	{

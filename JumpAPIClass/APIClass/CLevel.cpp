@@ -2,6 +2,8 @@
 #include "CLevel.h"
 #include "CObj.h"
 
+#include "CEngine.h"
+
 #include "CTile.h"
 
 CLevel::CLevel()
@@ -17,13 +19,28 @@ CLevel::~CLevel()
 
 void CLevel::tick()
 {
+	FindTileScreen();
+
 
 	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
-		for (size_t j = 0; j < m_arrLayer[i].size(); j++)
+		if (i == (UINT)LAYER::TILE)
 		{
-			m_arrLayer[i][j]->tick();
+			
+			for (size_t j = 0; j < m_vecTile.size(); j++)
+			{
+				m_vecTile[j]->tick();
+			}
+
 		}
+		else
+		{
+			for (size_t j = 0; j < m_arrLayer[i].size(); j++)
+			{
+				m_arrLayer[i][j]->tick();
+			}
+		}
+
 	}
 }
 
@@ -31,9 +48,19 @@ void CLevel::final_tick()
 {
 	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
-		for (size_t j = 0; j < m_arrLayer[i].size(); j++)
+		if (i == (UINT)LAYER::TILE)
 		{
-			m_arrLayer[i][j]->final_tick();
+			for (size_t j = 0; j < m_vecTile.size(); j++)
+			{
+				m_vecTile[j]->final_tick();
+			}
+		}
+		else
+		{
+			for (size_t j = 0; j < m_arrLayer[i].size(); j++)
+			{
+				m_arrLayer[i][j]->final_tick();
+			}
 		}
 	}
 }
@@ -43,21 +70,55 @@ void CLevel::render(HDC _dc)
 
 	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
-		vector<CObj*>::iterator iter = m_arrLayer[i].begin();
-
-		for (; iter != m_arrLayer[i].end();)
+		if (i == (UINT)LAYER::TILE)
 		{
-			if ((*iter)->IsDead())
+
+			for (size_t j = 0; j < m_vecTile.size(); j++)
 			{
-				iter = m_arrLayer[i].erase(iter);
+				m_vecTile[j]->render(_dc);
 			}
-			else
+
+		}
+		else
+		{
+			vector<CObj*>::iterator iter = m_arrLayer[i].begin();
+
+			for (; iter != m_arrLayer[i].end();)
 			{
-				(*iter)->render(_dc);
-				++iter;
+				if ((*iter)->IsDead())
+				{
+					iter = m_arrLayer[i].erase(iter);
+				}
+				else
+				{
+					(*iter)->render(_dc);
+					++iter;
+				}
 			}
 		}
 	}
+}
+
+void CLevel::SetFocusedUI(CObj* _pUI)
+{
+	vector<CObj*>& vecUI = m_arrLayer[(UINT)LAYER::UI];
+
+	if (vecUI.back() == _pUI)
+		return;
+
+	vector<CObj*>::iterator iter = vecUI.begin();
+	for (; iter != vecUI.end(); ++iter)
+	{
+		if ((*iter) == _pUI)
+		{
+			vecUI.erase(iter);
+			vecUI.push_back(_pUI);
+			return;
+		}
+	}
+
+	// Focued 처리할 UI 가 레벨에 없었다?!?!?!?
+	assert(nullptr);
 }
 
 void CLevel::DeleteAllobject()
@@ -107,5 +168,43 @@ void CLevel::CreateTile(UINT _x, UINT _y)
 	}
 
 }
+
+void CLevel::FindTileScreen()
+{
+	m_vecTile.clear();
+
+
+
+	//좌상단 구함
+	Vec2 vLeftTop = CCamera::GetInst()->GetLoot();
+	Vec2 vResolution = CEngine::GetInst()->GetResolution();
+	vLeftTop -= vResolution / 2.f;
+
+	int iLTCol = (int)vLeftTop.x / TILE_SIZE;						//몇번째 타일 부터 화면에 나오는가
+	int iLTRaw = (int)vLeftTop.y / TILE_SIZE;
+	if (vLeftTop.x <0.f)											//보정
+		iLTCol = 0;
+	if (vLeftTop.y < 0.f)
+		iLTRaw = 0;
+
+
+	int iMaxCol = (int)vResolution.x / TILE_SIZE + iLTCol + 1;		//한화면에 표현할수 있는 타일 개수
+	int iMaxRaw = (int)vResolution.y / TILE_SIZE + iLTRaw + 1;
+	if (m_iTileXCount < iMaxCol)									//보정
+		iMaxCol = m_iTileXCount;
+	if (m_iTileYCount < iMaxRaw)
+		iMaxRaw = m_iTileYCount;
+
+	for (int iRaw = iLTRaw; iRaw < iMaxRaw; iRaw++)
+	{
+		for (int iCol = iLTCol; iCol < iMaxCol; iCol++)
+		{
+			int iTileIdx = iRaw * m_iTileXCount + iCol;
+			m_vecTile.push_back(m_arrLayer[(UINT)LAYER::TILE][iTileIdx]);
+		}
+	}
+}
+
+
 
 
